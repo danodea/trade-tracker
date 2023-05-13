@@ -1,10 +1,10 @@
-import { TradeType } from "../../data/data.interface";
+import { TradeType } from "../data/data.interface";
 
-export interface TradeProps {
+export interface TradeDetailsProps {
   trade: TradeType;
 }
 
-export function Trade(props: TradeProps) {
+export function TradeDetails(props: TradeDetailsProps) {
   const { trade } = props;
   const createdDate = new Date(Number(trade.date.created));
 

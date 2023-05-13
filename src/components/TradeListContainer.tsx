@@ -2,7 +2,7 @@ import tradeData from "../data/MOCK_DATA.json";
 import { useState } from "react";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
-import { Trade } from "./Trade";
+import { TradeDetails } from "./TradeDetails";
 import { TradeList } from "./TradeList";
 import { TradeListSearch } from "./TradeListSearch";
 import { TradeType } from "../data/data.interface";
@@ -44,7 +44,7 @@ export function TradeListContainer() {
         size="50vw"
         lockBackgroundScroll
       >
-        {selectedTrade && <Trade trade={selectedTrade} />}
+        {selectedTrade && <TradeDetails trade={selectedTrade} />}
       </Drawer>
     </div>
   );

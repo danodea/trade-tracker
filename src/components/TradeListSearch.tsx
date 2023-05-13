@@ -6,7 +6,7 @@ export function TradeListSearch(props: TradeListSearchProps) {
   const { updateDisplayOptions } = props;
 
   return (
-    <menu>
+    <div>
       <label htmlFor="search">
         Username Search
         <input
@@ -36,6 +36,6 @@ export function TradeListSearch(props: TradeListSearchProps) {
           }
         />
       </label>
-    </menu>
+    </div>
   );
 }

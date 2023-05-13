@@ -1,4 +1,5 @@
 import { TradeListContainer } from "./components/TradeListContainer";
+import "./App.css";
 
 function App() {
   return (
