@@ -47,8 +47,10 @@ export function TradeList(props: TradeListProps) {
           (!trade.date.shipped || showShipped)
         );
       })}
-      striped
+      // striped
+      dense
       pointerOnHover
+      highlightOnHover
       defaultSortFieldId={3}
       onRowClicked={(row) => handleSelection(row)}
     />

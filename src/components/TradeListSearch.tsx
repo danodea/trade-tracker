@@ -6,17 +6,23 @@ export function TradeListSearch(props: TradeListSearchProps) {
   const { updateDisplayOptions } = props;
 
   return (
-    <div>
-      <label htmlFor="search">
+    <form className="mb-4 rounded bg-white p-8 shadow-md">
+      <label>
         Username Search
         <input
+          className="focus:shadow-outline w-1/4 appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           name="search"
           type="text"
           onBlur={(e) => updateDisplayOptions("searchString", e.target.value)}
         />
-        <button>Search</button>
+        <input
+          className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
+          type="submit"
+          onClick={(e) => e.preventDefault()}
+          value="Search"
+        />
       </label>
-      <label htmlFor="archived">
+      <label>
         Show archived
         <input
           name="archived"
@@ -26,7 +32,7 @@ export function TradeListSearch(props: TradeListSearchProps) {
           }
         />
       </label>
-      <label htmlFor="shipped">
+      <label>
         Show shipped
         <input
           name="shipped"
@@ -36,6 +42,6 @@ export function TradeListSearch(props: TradeListSearchProps) {
           }
         />
       </label>
-    </div>
+    </form>
   );
 }

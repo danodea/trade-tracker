@@ -1,11 +1,10 @@
 import { TradeListContainer } from "./components/TradeListContainer";
-import "./App.css";
 
 function App() {
   return (
     <>
-      <header>
-        <h1>Trade Tracker</h1>
+      <header className="mb-4">
+        <h1 className="text-lg font-bold">Trade Tracker</h1>
         {/* <AppMenu /> */}
       </header>
       <main>
