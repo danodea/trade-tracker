@@ -1,9 +1,9 @@
-import tradeData from "../../data/MOCK_DATA.json";
+import tradeData from "../../../data/MOCK_DATA.json";
 import { useState } from "react";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
-import { Trade } from "../trade/Trade";
-import { TradeType } from "../../data/data.interface";
+import { Trade } from "../../trade/Trade";
+import { TradeType } from "../../../data/data.interface";
 
 export function TradeList() {
   const [searchString, setSearchString] = useState("");

@@ -1,7 +1,13 @@
-import { TradeList } from "./components/trade-list/TradeList";
+import { TradeList } from "./components/TradeListView/trade-list/TradeList";
 
 function App() {
-  return <TradeList />;
+  return (
+    <>
+      <h1>Trade Tracker</h1>
+      <TradeListSearch />
+      <TradeList />
+    </>
+  );
 }
 
 export default App;
