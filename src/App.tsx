@@ -1,11 +1,15 @@
-import { TradeList } from "./components/TradeListView/trade-list/TradeList";
+import { TradeListContainer } from "./components/TradeListContainer";
 
 function App() {
   return (
     <>
-      <h1>Trade Tracker</h1>
-      <TradeListSearch />
-      <TradeList />
+      <header>
+        <h1>Trade Tracker</h1>
+        {/* <AppMenu /> */}
+      </header>
+      <main>
+        <TradeListContainer />
+      </main>
     </>
   );
 }
