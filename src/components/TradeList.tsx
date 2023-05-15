@@ -22,7 +22,8 @@ export function TradeList(props: TradeListProps) {
     {
       name: "ID",
       selector: (row) => row.id,
-      omit: true,
+      // omit: true,
+      sortable: true,
     },
     {
       name: "Username",
@@ -42,8 +43,8 @@ export function TradeList(props: TradeListProps) {
       data={data.filter((trade) => {
         return (
           (!searchString.length || trade.username.includes(searchString)) &&
-          (!showArchived || trade.date.archived) &&
-          (!showShipped || trade.date.shipped)
+          (!trade.date.archived || showArchived) &&
+          (!trade.date.shipped || showShipped)
         );
       })}
       striped
