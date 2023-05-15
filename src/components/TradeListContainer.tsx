@@ -25,7 +25,7 @@ export function TradeListContainer() {
     toggleDrawer();
   };
 
-  const updateDisplayOptions = (key: string, value: any) => {
+  const updateDisplayOptions = (key: string, value: string | boolean) => {
     setDisplayOptions({ ...displayOptions, [key]: value });
   };
 

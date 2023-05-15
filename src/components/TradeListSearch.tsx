@@ -1,5 +1,5 @@
 export interface TradeListSearchProps {
-  updateDisplayOptions: (action: string, value: any) => void;
+  updateDisplayOptions: (action: string, value: string | boolean) => void;
 }
 
 export function TradeListSearch(props: TradeListSearchProps) {
