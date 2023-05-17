@@ -4,7 +4,7 @@ import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
 import { TradeDetails } from "./TradeDetails";
 import { TradeList } from "./TradeList";
-import { TradeListSearch } from "./TradeListSearch";
+import { TradeListMenu } from "./TradeListMenu";
 import { TradeType } from "../data/data.interface";
 
 export function TradeListContainer() {
@@ -31,7 +31,7 @@ export function TradeListContainer() {
 
   return (
     <div>
-      <TradeListSearch updateDisplayOptions={updateDisplayOptions} />
+      <TradeListMenu updateDisplayOptions={updateDisplayOptions} />
       <TradeList
         data={tradeData}
         displayOptions={displayOptions}
