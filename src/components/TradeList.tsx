@@ -38,21 +38,23 @@ export function TradeList(props: TradeListProps) {
   ];
 
   return (
-    <DataTable
-      columns={columns}
-      data={data.filter((trade) => {
-        return (
-          (!searchString.length || trade.username.includes(searchString)) &&
-          (!trade.date.archived || showArchived) &&
-          (!trade.date.shipped || showShipped)
-        );
-      })}
-      // striped
-      dense
-      pointerOnHover
-      highlightOnHover
-      defaultSortFieldId={3}
-      onRowClicked={(row) => handleSelection(row)}
-    />
+    <div className="rounded p-2">
+      <DataTable
+        columns={columns}
+        data={data.filter((trade) => {
+          return (
+            (!searchString.length || trade.username.includes(searchString)) &&
+            (!trade.date.archived || showArchived) &&
+            (!trade.date.shipped || showShipped)
+          );
+        })}
+        // striped
+        dense
+        pointerOnHover
+        highlightOnHover
+        defaultSortFieldId={3}
+        onRowClicked={(row) => handleSelection(row)}
+      />
+    </div>
   );
 }
