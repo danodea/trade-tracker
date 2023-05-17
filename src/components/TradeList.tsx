@@ -1,5 +1,6 @@
 import DataTable, { TableColumn } from "react-data-table-component";
 import { TradeType } from "../data/data.interface";
+import { StatusPill } from "./StatusPill";
 
 export interface TradeListProps {
   data: TradeType[];
@@ -18,6 +19,15 @@ export function TradeList(props: TradeListProps) {
     handleSelection,
   } = props;
 
+  const createStatusCell = (row: TradeType) => {
+    return (
+      <div className="flex flex-row gap-2">
+        {row.date.shipped ? <StatusPill value="Shipped" /> : ""}
+        {row.date.archived ? <StatusPill value="Archived" /> : ""}
+      </div>
+    );
+  };
+
   const columns: TableColumn<TradeType>[] = [
     {
       name: "ID",
@@ -35,6 +45,7 @@ export function TradeList(props: TradeListProps) {
       selector: (row) => row.date.created,
       sortable: true,
     },
+    { name: "Status", cell: (row) => createStatusCell(row) },
   ];
 
   return (
