@@ -1,6 +1,7 @@
 import DataTable, { TableColumn } from "react-data-table-component";
 import { TradeType } from "../data/data.interface";
 import { StatusPill } from "./StatusPill";
+import * as dayjs from "dayjs";
 
 export interface TradeListProps {
   data: TradeType[];
@@ -43,6 +44,7 @@ export function TradeList(props: TradeListProps) {
     {
       name: "Created",
       selector: (row) => row.date.created,
+      format: (row) => dayjs(Number(row.date.created)).format("MM / DD / YYYY"),
       sortable: true,
     },
     { name: "Status", cell: (row) => createStatusCell(row) },
