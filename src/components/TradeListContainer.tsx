@@ -44,7 +44,7 @@ export function TradeListContainer() {
         displayOptions={displayOptions}
         handleSelection={handleTradeClick}
       />
-      <Dialog open={isOpen}>
+      <Dialog open={isOpen} fullScreen>
         {<AddEditTrade trade={selectedTrade} onClose={toggleDialog} />}
       </Dialog>
     </div>
