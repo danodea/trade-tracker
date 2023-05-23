@@ -1,15 +1,17 @@
 export interface TradeListMenuProps {
   updateDisplayOptions: (action: string, value: string | boolean) => void;
+  handleAddTradeButtonClick: () => void;
 }
 
 export function TradeListMenu(props: TradeListMenuProps) {
-  const { updateDisplayOptions } = props;
+  const { updateDisplayOptions, handleAddTradeButtonClick } = props;
 
   return (
     <form className="mb-4 flex flex-row gap-4 rounded bg-white px-8 py-6 shadow-md">
       <input
         className="w-1/6 cursor-pointer rounded bg-cyan-300 px-4 py-2 font-bold hover:bg-cyan-200 active:bg-cyan-600"
         type="button"
+        onClick={handleAddTradeButtonClick}
         value="Add Trade"
       />
       <input
