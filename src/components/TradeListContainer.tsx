@@ -1,7 +1,6 @@
 import tradeData from "../data/MOCK_DATA.json";
 import { useState } from "react";
-import Drawer from "react-modern-drawer";
-import "react-modern-drawer/dist/index.css";
+import Dialog from "@mui/material/Dialog";
 import { AddEditTrade } from "./AddEditTrade";
 import { TradeList } from "./TradeList";
 import { TradeListMenu } from "./TradeListMenu";
@@ -16,13 +15,13 @@ export function TradeListContainer() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTrade, setSelectedTrade] = useState<TradeType>();
 
-  const toggleDrawer = () => {
+  const toggleDialog = () => {
     setIsOpen((prevState) => !prevState);
   };
 
   const handleTradeClick = (trade: TradeType) => {
     setSelectedTrade(trade);
-    toggleDrawer();
+    toggleDialog();
   };
 
   const handleAddTradeButtonClick = () => {
@@ -45,15 +44,9 @@ export function TradeListContainer() {
         displayOptions={displayOptions}
         handleSelection={handleTradeClick}
       />
-      <Drawer
-        open={isOpen}
-        onClose={toggleDrawer}
-        direction="right"
-        size="50vw"
-        lockBackgroundScroll
-      >
-        {<AddEditTrade trade={selectedTrade} />}
-      </Drawer>
+      <Dialog open={isOpen}>
+        {<AddEditTrade trade={selectedTrade} onClose={toggleDialog} />}
+      </Dialog>
     </div>
   );
 }
