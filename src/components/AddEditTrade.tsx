@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { useState } from "react";
 
 export interface AddEditTradeProps {
   trade?: TradeType;
@@ -21,6 +22,7 @@ export interface AddEditTradeProps {
 
 export function AddEditTrade(props: AddEditTradeProps) {
   const { trade, onClose } = props;
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DialogTitle>{trade ? "Edit Trade" : "Add Trade"}</DialogTitle>
@@ -31,6 +33,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
             margin="dense"
             id="source"
             label="Trade Source"
+            value={trade?.source}
           />
           <hr className="my-4" />
           <FormGroup>
@@ -40,24 +43,42 @@ export function AddEditTrade(props: AddEditTradeProps) {
                 margin="dense"
                 id="username"
                 label="Username"
+                value={trade?.username}
               />
               <TextField
                 className="grow"
                 margin="dense"
                 id="full-name"
                 label="Full Name"
+                value={trade?.address.name}
               />
             </div>
-            <TextField margin="dense" id="street" label="Street Address" />
+            <TextField
+              margin="dense"
+              id="street"
+              label="Street Address"
+              value={trade?.address.street}
+            />
             <div className="flex gap-4">
               <TextField
                 className="grow"
                 margin="dense"
                 id="city"
                 label="City"
+                value={trade?.address.city}
               />
-              <TextField margin="dense" id="state" label="State" />
-              <TextField margin="dense" id="zip" label="ZIP Code" />
+              <TextField
+                margin="dense"
+                id="state"
+                label="State"
+                value={trade?.address.state}
+              />
+              <TextField
+                margin="dense"
+                id="zip"
+                label="ZIP Code"
+                value={trade?.address.zip}
+              />
             </div>
           </FormGroup>
           <hr className="my-4" />
@@ -69,6 +90,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
             label="Cards In"
             helperText="Cards you are receiving in the trade"
             minRows={4}
+            defaultValue={trade?.cards.in}
           />
           <TextField
             className="w-full"
@@ -78,6 +100,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
             label="Cards Out"
             helperText="Cards you are sending in the trade"
             minRows={4}
+            defaultValue={trade?.cards.out}
           />
           <hr className="mb-4 mt-2" />
           <div className="mt-4 flex flex-col flex-wrap">
@@ -90,6 +113,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   label="Shipping Method"
+                  value={trade?.shipping.method}
                 >
                   <MenuItem value="PWE">PWE</MenuItem>
                   <MenuItem value="BMWT">BMWT</MenuItem>
@@ -103,16 +127,18 @@ export function AddEditTrade(props: AddEditTradeProps) {
               <TextField
                 className="grow"
                 margin="dense"
-                id="tracking-in"
-                label="Tracking In"
+                id="tracking-out"
+                label="Tracking Out"
                 helperText="Tracking you sent"
+                value={trade?.shipping.tracking.in}
               />
               <TextField
                 className="grow"
                 margin="dense"
-                id="tracking-out"
-                label="Tracking Out"
+                id="tracking-in"
+                label="Tracking In"
                 helperText="Tracking trade partner sent"
+                value={trade?.shipping.tracking.out}
               />
             </div>
           </div>
