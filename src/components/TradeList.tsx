@@ -7,7 +7,6 @@ export interface TradeListProps {
   data: TradeType[];
   displayOptions: {
     searchString: string;
-    showArchived: boolean;
     showShipped: boolean;
   };
   handleSelection: (trade: TradeType) => void;
@@ -16,7 +15,7 @@ export interface TradeListProps {
 export function TradeList(props: TradeListProps) {
   const {
     data,
-    displayOptions: { searchString, showArchived, showShipped },
+    displayOptions: { searchString, showShipped },
     handleSelection,
   } = props;
 
@@ -24,7 +23,6 @@ export function TradeList(props: TradeListProps) {
     return (
       <div className="flex flex-row gap-2">
         {row.date.shipped ? <StatusPill value="Shipped" /> : ""}
-        {row.date.archived ? <StatusPill value="Archived" /> : ""}
       </div>
     );
   };
@@ -57,7 +55,6 @@ export function TradeList(props: TradeListProps) {
         data={data.filter((trade) => {
           return (
             (!searchString.length || trade.username.includes(searchString)) &&
-            (!trade.date.archived || showArchived) &&
             (!trade.date.shipped || showShipped)
           );
         })}

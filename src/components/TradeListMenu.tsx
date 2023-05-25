@@ -25,17 +25,6 @@ export function TradeListMenu(props: TradeListMenuProps) {
         placeholder="Filter Usernames"
       />
       <label className="rounded border p-2 shadow">
-        Show archived
-        <input
-          className="ml-4"
-          name="archived"
-          type="checkbox"
-          onChange={(e) =>
-            updateDisplayOptions("showArchived", e.target.checked)
-          }
-        />
-      </label>
-      <label className="rounded border p-2 shadow">
         Show shipped
         <input
           className="ml-4"

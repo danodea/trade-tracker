@@ -23,9 +23,6 @@ export interface TradeType {
     date: {
         created: string,
         shipped: string | null,
-        received: string | null,
-        feedback: string | null,
-        archived: string | null,
     }
 
 }

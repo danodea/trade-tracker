@@ -9,7 +9,6 @@ import { TradeType } from "../data/data.interface";
 export function TradeListContainer() {
   const [displayOptions, setDisplayOptions] = useState({
     searchString: "",
-    showArchived: false,
     showShipped: false,
   });
   const [isOpen, setIsOpen] = useState(false);
