@@ -14,6 +14,7 @@ import {
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useState } from "react";
+import * as dayjs from "dayjs";
 
 export interface AddEditTradeProps {
   trade?: TradeType;
@@ -120,7 +121,14 @@ export function AddEditTrade(props: AddEditTradeProps) {
                 </Select>
               </FormControl>
               <FormControl margin="dense">
-                <DatePicker label="Date Shipped" />
+                <DatePicker
+                  label="Date Shipped"
+                  {...(trade?.date.shipped
+                    ? {
+                        defaultValue: dayjs(Number(trade?.date.shipped)),
+                      }
+                    : {})}
+                />
               </FormControl>
             </div>
             <div className="flex gap-4">
