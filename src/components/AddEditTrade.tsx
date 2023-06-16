@@ -34,7 +34,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
             margin="dense"
             id="source"
             label="Trade Source"
-            value={trade?.source}
+            defaultValue={trade?.source}
           />
           <hr className="my-4" />
           <FormGroup>
@@ -44,21 +44,21 @@ export function AddEditTrade(props: AddEditTradeProps) {
                 margin="dense"
                 id="username"
                 label="Username"
-                value={trade?.username}
+                defaultValue={trade?.username}
               />
               <TextField
                 className="grow"
                 margin="dense"
                 id="full-name"
                 label="Full Name"
-                value={trade?.address.name}
+                defaultValue={trade?.address.name}
               />
             </div>
             <TextField
               margin="dense"
               id="street"
               label="Street Address"
-              value={trade?.address.street}
+              defaultValue={trade?.address.street}
             />
             <div className="flex gap-4">
               <TextField
@@ -66,19 +66,19 @@ export function AddEditTrade(props: AddEditTradeProps) {
                 margin="dense"
                 id="city"
                 label="City"
-                value={trade?.address.city}
+                defaultValue={trade?.address.city}
               />
               <TextField
                 margin="dense"
                 id="state"
                 label="State"
-                value={trade?.address.state}
+                defaultValue={trade?.address.state}
               />
               <TextField
                 margin="dense"
                 id="zip"
                 label="ZIP Code"
-                value={trade?.address.zip}
+                defaultValue={trade?.address.zip}
               />
             </div>
           </FormGroup>
@@ -114,7 +114,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   label="Shipping Method"
-                  value={trade?.shipping.method}
+                  defaultValue={trade?.shipping.method}
                 >
                   <MenuItem value="PWE">PWE</MenuItem>
                   <MenuItem value="BMWT">BMWT</MenuItem>
@@ -138,7 +138,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
                 id="tracking-out"
                 label="Tracking Out"
                 helperText="Tracking you sent"
-                value={trade?.shipping.tracking.in}
+                defaultValue={trade?.shipping.tracking.in}
               />
               <TextField
                 className="grow"
@@ -146,7 +146,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
                 id="tracking-in"
                 label="Tracking In"
                 helperText="Tracking trade partner sent"
-                value={trade?.shipping.tracking.out}
+                defaultValue={trade?.shipping.tracking.out}
               />
             </div>
           </div>
