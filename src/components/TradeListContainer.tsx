@@ -4,7 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import { AddEditTrade } from "./AddEditTrade";
 import { TradeList } from "./TradeList";
 import { TradeListMenu } from "./TradeListMenu";
-import { TradeType } from "../data/data.interface";
+import { ITrade } from "../data/data.interface";
 
 export function TradeListContainer() {
   const [displayOptions, setDisplayOptions] = useState({
@@ -12,13 +12,13 @@ export function TradeListContainer() {
     showShipped: false,
   });
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedTrade, setSelectedTrade] = useState<TradeType>();
+  const [selectedTrade, setSelectedTrade] = useState<ITrade>();
 
   const toggleDialog = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  const handleTradeClick = (trade: TradeType) => {
+  const handleTradeClick = (trade: ITrade) => {
     setSelectedTrade(trade);
     toggleDialog();
   };

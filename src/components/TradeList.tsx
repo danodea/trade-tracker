@@ -1,15 +1,15 @@
 import DataTable, { TableColumn } from "react-data-table-component";
-import { TradeType } from "../data/data.interface";
+import { ITrade } from "../data/data.interface";
 import { StatusPill } from "./StatusPill";
 import * as dayjs from "dayjs";
 
 export interface TradeListProps {
-  data: TradeType[];
+  data: ITrade[];
   displayOptions: {
     searchString: string;
     showShipped: boolean;
   };
-  handleSelection: (trade: TradeType) => void;
+  handleSelection: (trade: ITrade) => void;
 }
 
 export function TradeList(props: TradeListProps) {
@@ -19,7 +19,7 @@ export function TradeList(props: TradeListProps) {
     handleSelection,
   } = props;
 
-  const createStatusCell = (row: TradeType) => {
+  const createStatusCell = (row: ITrade) => {
     return (
       <div className="flex flex-row gap-2">
         {row.date.shipped ? <StatusPill value="Shipped" /> : ""}
@@ -27,7 +27,7 @@ export function TradeList(props: TradeListProps) {
     );
   };
 
-  const columns: TableColumn<TradeType>[] = [
+  const columns: TableColumn<ITrade>[] = [
     {
       name: "ID",
       selector: (row) => row.id,

@@ -1,4 +1,4 @@
-export interface TradeType {
+export interface ITrade {
     id: number,
     username: string,
     source: string,

@@ -1,4 +1,4 @@
-import { TradeType } from "../data/data.interface";
+import { ITrade } from "../data/data.interface";
 import {
   FormControl,
   Button,
@@ -17,17 +17,44 @@ import { useState } from "react";
 import * as dayjs from "dayjs";
 
 export interface AddEditTradeProps {
-  trade?: TradeType;
+  trade?: ITrade;
   onClose: () => void;
 }
 
 export function AddEditTrade(props: AddEditTradeProps) {
   const { trade, onClose } = props;
+  const [tradeFormData, setTradeFormData] = useState({});
+
+  function handleCancel() {
+    onClose();
+  }
+
+  function handleSubmit(e: React.SyntheticEvent) {
+    e.preventDefault();
+    console.log(tradeFormData);
+  }
+
+  function handleDelete() {
+    onClose();
+  }
+
+  function updateState(e: React.FocusEvent<HTMLInputElement>) {
+    setTradeFormData({
+      ...tradeFormData,
+      [e.target.id]: e.target.value,
+    });
+  }
+
+  function handleShipDate(value: dayjs.Dayjs | null) {
+    console.log(value);
+  }
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DialogTitle>{trade ? "Edit Trade" : "Add Trade"}</DialogTitle>
-      <DialogContent>
+      <DialogContent
+        onBlur={(e: React.FocusEvent<HTMLInputElement>) => updateState(e)}
+      >
         <form id="add-edit">
           <TextField
             className="w-full"
@@ -49,7 +76,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
               <TextField
                 className="grow"
                 margin="dense"
-                id="full-name"
+                id="name"
                 label="Full Name"
                 defaultValue={trade?.address.name}
               />
@@ -87,7 +114,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
             className="w-full"
             multiline
             margin="dense"
-            id="cards-in"
+            id="cardsIn"
             label="Cards In"
             helperText="Cards you are receiving in the trade"
             minRows={4}
@@ -97,7 +124,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
             className="w-full"
             multiline
             margin="dense"
-            id="cards-out"
+            id="cardsOut"
             label="Cards Out"
             helperText="Cards you are sending in the trade"
             minRows={4}
@@ -107,14 +134,14 @@ export function AddEditTrade(props: AddEditTradeProps) {
           <div className="mt-4 flex flex-col flex-wrap">
             <div className="flex gap-4">
               <FormControl margin="dense" className="w-1/2">
-                <InputLabel id="demo-simple-select-label">
+                <InputLabel id="shipping-method-label">
                   Shipping Method
                 </InputLabel>
                 <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
+                  labelId="shipping-method-label"
+                  id="shippingMethod"
                   label="Shipping Method"
-                  defaultValue={trade?.shipping.method}
+                  defaultValue={trade?.shipping.method || ""}
                 >
                   <MenuItem value="PWE">PWE</MenuItem>
                   <MenuItem value="BMWT">BMWT</MenuItem>
@@ -122,6 +149,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
               </FormControl>
               <FormControl margin="dense">
                 <DatePicker
+                  onChange={(value) => handleShipDate(value)}
                   label="Date Shipped"
                   {...(trade?.date.shipped
                     ? {
@@ -135,7 +163,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
               <TextField
                 className="grow"
                 margin="dense"
-                id="tracking-out"
+                id="trackingOut"
                 label="Tracking Out"
                 helperText="Tracking you sent"
                 defaultValue={trade?.shipping.tracking.in}
@@ -143,7 +171,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
               <TextField
                 className="grow"
                 margin="dense"
-                id="tracking-in"
+                id="trackingIn"
                 label="Tracking In"
                 helperText="Tracking trade partner sent"
                 defaultValue={trade?.shipping.tracking.out}
@@ -153,9 +181,9 @@ export function AddEditTrade(props: AddEditTradeProps) {
         </form>
       </DialogContent>
       <DialogActions className="mb-2 mr-6">
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={handleCancel}>Cancel</Button>
         {trade && (
-          <Button variant="contained" color="error" onClick={onClose}>
+          <Button variant="contained" color="error" onClick={handleDelete}>
             Delete
           </Button>
         )}
@@ -164,7 +192,7 @@ export function AddEditTrade(props: AddEditTradeProps) {
           form="add-edit"
           className="w-28"
           variant="contained"
-          onClick={onClose}
+          onClick={(e) => handleSubmit(e)}
         >
           Save
         </Button>
