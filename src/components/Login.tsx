@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
-import { NavLink, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,7 +11,6 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        navigate("/");
         console.log(user);
       })
       .catch((error) => {
@@ -57,10 +54,6 @@ const Login = () => {
                 <button onClick={onLogin}>Login</button>
               </div>
             </form>
-
-            <p className="text-center text-sm text-white">
-              No account yet? <NavLink to="/signup">Sign up</NavLink>
-            </p>
           </div>
         </section>
       </main>

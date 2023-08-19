@@ -1,7 +1,10 @@
+import { TradeListContainer } from "./components/TradeListContainer";
 import { auth } from "./firebase/firebase";
-import { Outlet } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function App() {
+  const [user, loading, error] = useAuthState(auth);
+
   return (
     <>
       <header className="mb-4">
@@ -10,9 +13,7 @@ function App() {
         </h1>
         {/* <AppMenu /> */}
       </header>
-      <main>
-        <Outlet />
-      </main>
+      <main>{user && <TradeListContainer />}</main>
     </>
   );
 }
