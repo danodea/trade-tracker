@@ -1,19 +1,26 @@
+import Login from "./components/Login";
 import { TradeListContainer } from "./components/TradeListContainer";
 import { auth } from "./firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Logout from "./components/Logout";
 
 function App() {
   const [user, loading, error] = useAuthState(auth);
 
   return (
     <>
-      <header className="mb-4">
+      <header className="mb-4 flex flex-row justify-between">
         <h1 className="mb-10 mt-6 text-center text-4xl font-bold">
           Trade Tracker
         </h1>
-        {/* <AppMenu /> */}
+        {user && <Logout />}
       </header>
-      <main>{user && <TradeListContainer />}</main>
+      <main>
+        {loading && <div>loading...</div>}
+        {error && <div>{error.message}</div>}
+        {!loading && user && <TradeListContainer />}
+        {!loading && !user && <Login />}
+      </main>
     </>
   );
 }
