@@ -1,6 +1,6 @@
 import Login from "./components/Login";
 import { TradeListContainer } from "./components/TradeListContainer";
-import { auth } from "./firebase/firebase";
+import { auth, database } from "./firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Logout from "./components/Logout";
 
@@ -18,7 +18,7 @@ function App() {
       <main>
         {loading && <div>loading...</div>}
         {error && <div>{error.message}</div>}
-        {!loading && user && <TradeListContainer />}
+        {!loading && user && <TradeListContainer userId={user.uid} />}
         {!loading && !user && <Login />}
       </main>
     </>

@@ -29,12 +29,6 @@ export function TradeList(props: TradeListProps) {
 
   const columns: TableColumn<ITrade>[] = [
     {
-      name: "ID",
-      selector: (row) => row.id,
-      // omit: true,
-      sortable: true,
-    },
-    {
       name: "Username",
       selector: (row) => row.username,
       sortable: true,

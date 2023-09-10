@@ -1,18 +1,30 @@
-import tradeData from "../data/MOCK_DATA.json";
 import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import { AddEditTrade } from "./AddEditTrade";
 import { TradeList } from "./TradeList";
 import { TradeListMenu } from "./TradeListMenu";
 import { ITrade } from "../data/data.interface";
+import { ref } from "firebase/database";
+import { useList } from "react-firebase-hooks/database";
+import { database } from "../firebase/firebase";
 
-export function TradeListContainer() {
+interface ITradeListContainerProps {
+  userId: string;
+}
+
+export function TradeListContainer(props: ITradeListContainerProps) {
+  const { userId } = props;
   const [displayOptions, setDisplayOptions] = useState({
     searchString: "",
     showShipped: false,
   });
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTrade, setSelectedTrade] = useState<ITrade>();
+  const trades = ref(database, `trades/${userId}`);
+
+  const [snapshot, loading, error] = useList(trades);
+
+  console.log(snapshot?.map((v) => v.val()));
 
   const toggleDialog = () => {
     setIsOpen((prevState) => !prevState);
@@ -39,7 +51,7 @@ export function TradeListContainer() {
         handleAddTradeButtonClick={handleAddTradeButtonClick}
       />
       <TradeList
-        data={tradeData}
+        data={snapshot?.map((v) => v.val()) as ITrade[]}
         displayOptions={displayOptions}
         handleSelection={handleTradeClick}
       />
