@@ -56,7 +56,7 @@ export function TradeListContainer(props: ITradeListContainerProps) {
         handleSelection={handleTradeClick}
       />
       <Dialog open={isOpen}>
-        {<AddEditTrade trade={selectedTrade} onClose={toggleDialog} />}
+        {<AddEditTrade trade={selectedTrade} onClose={toggleDialog} db={trades}/>}
       </Dialog>
     </div>
   );

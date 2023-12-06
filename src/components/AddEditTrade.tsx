@@ -13,17 +13,36 @@ import {
 } from "@mui/material";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { useState } from "react";
+import React, { useState } from "react";
 import * as dayjs from "dayjs";
+import { set } from "firebase/database";
+import { SelectChangeEvent } from "@mui/material";
 
 export interface AddEditTradeProps {
   trade?: ITrade;
   onClose: () => void;
+  db: any;
 }
 
 export function AddEditTrade(props: AddEditTradeProps) {
-  const { trade, onClose } = props;
+  const { trade, onClose, db } = props;
   const [tradeFormData, setTradeFormData] = useState({});
+
+  const tradeFields = [
+    "cardsIn",
+    "cardsOut",
+    "city",
+    "name",
+    "shipDate",
+    "shippingMethod",
+    "source",
+    "state",
+    "street",
+    "trackingIn",
+    "trackingOut",
+    "username",
+    "zip",
+  ];
 
   function handleCancel() {
     onClose();
@@ -32,28 +51,30 @@ export function AddEditTrade(props: AddEditTradeProps) {
   function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     console.log(tradeFormData);
+    // set(db, tradeFormData);
   }
 
   function handleDelete() {
     onClose();
   }
 
-  function updateState(e: React.FocusEvent<HTMLInputElement>) {
-    setTradeFormData({
-      ...tradeFormData,
-      [e.target.id]: e.target.value,
-    });
-  }
-
-  function handleShipDate(value: dayjs.Dayjs | null) {
-    console.log(value);
+  function updateState(field: string, value: string) {
+    if (tradeFields.includes(field)) {
+      setTradeFormData({
+        ...tradeFormData,
+        [field]: value,
+      });
+    }
+    console.log(tradeFormData);
   }
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DialogTitle>{trade ? "Edit Trade" : "Add Trade"}</DialogTitle>
       <DialogContent
-        onBlur={(e: React.FocusEvent<HTMLInputElement>) => updateState(e)}
+        onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
+          updateState(e.target.id, e.target.value)
+        }
       >
         <form id="add-edit">
           <TextField
@@ -139,9 +160,11 @@ export function AddEditTrade(props: AddEditTradeProps) {
                 </InputLabel>
                 <Select
                   labelId="shipping-method-label"
-                  id="shippingMethod"
                   label="Shipping Method"
                   defaultValue={trade?.shipping.method || ""}
+                  onChange={(e: SelectChangeEvent<string>) =>
+                    updateState("shippingMethod", e.target.value)
+                  }
                 >
                   <MenuItem value="PWE">PWE</MenuItem>
                   <MenuItem value="BMWT">BMWT</MenuItem>
@@ -149,7 +172,9 @@ export function AddEditTrade(props: AddEditTradeProps) {
               </FormControl>
               <FormControl margin="dense">
                 <DatePicker
-                  onChange={(value) => handleShipDate(value)}
+                  onChange={(value) =>
+                    updateState("shipDate", value?.format("MM/DD/YYYY") || "")
+                  }
                   label="Date Shipped"
                   {...(trade?.date.shipped
                     ? {
